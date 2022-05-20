@@ -14,6 +14,8 @@ public class Sketch extends PApplet {
 
   int intGrid[][] = new int[ROW_COUNT][COLUMN_COUNT];
 
+  int cellsSelected;
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -53,7 +55,6 @@ public class Sketch extends PApplet {
           rect(MARGIN + (column * (CELL_WIDTH + MARGIN)), MARGIN + (row * (CELL_HEIGHT + MARGIN)), CELL_WIDTH, CELL_HEIGHT);
         }
 
-
       }
     }
   }
@@ -69,70 +70,73 @@ public class Sketch extends PApplet {
         if (mouseX / (CELL_WIDTH + MARGIN) == column && mouseY / (CELL_HEIGHT + MARGIN) == row) {
 
           // conditions that change colour of cell above cell pressed
-          if (row > 0 && intGrid[row-1][column] == 0) {
+          if (intGrid[row-1][column] == 0 && row > 0) {
 
             intGrid[row-1][column] = 1;
-            
+            cellsSelected++;
           }
           
-          else if (row > 0 && intGrid[row-1][column] == 1) {
+          else if (intGrid[row-1][column] == 1 && row > 0) {
 
             intGrid[row-1][column] = 0;
-            
+            cellsSelected--;
           }
 
           // conditions that change color of cell below cell pressed
-          if (row < ROW_COUNT - 1 && intGrid[row+1][column] == 0) {
+          if (intGrid[row+1][column] == 0 && row < ROW_COUNT - 1) {
 
             intGrid[row+1][column] = 1;
-            
+            cellsSelected++;
           }
 
-          else if (row < ROW_COUNT - 1 && intGrid[row+1][column] == 1) {
+          else if (intGrid[row+1][column] == 1 && row < ROW_COUNT - 1) {
 
             intGrid[row+1][column] = 0;
-            
-            
+            cellsSelected--;
+          
           }
 
           // conditions that change color of cell to the left of cell pressed
-          if (column > 0 && intGrid[row][column-1] == 0) {
+          if (intGrid[row][column-1] == 0 && column > 0) {
 
             intGrid[row][column-1] = 1;
-            
+            cellsSelected++;
           }
 
-          else if (column > 0 && intGrid[row][column-1] == 1) {
+          else if (intGrid[row][column-1] == 1 && column > 0) {
           
             intGrid[row][column-1] = 0;
-            
+            cellsSelected--;
           }
 
           // conditions that change color of cell to the right of cell pressed
-          if (column < COLUMN_COUNT - 1 && intGrid[row][column+1] == 0) {
+          if (intGrid[row][column+1] == 0 && column < COLUMN_COUNT - 1) {
 
             intGrid[row][column+1] = 1;
-            
+            cellsSelected++;
           }
 
-          else if (column < COLUMN_COUNT - 1 && intGrid[row][column+1] == 1) {
+          else if (intGrid[row][column+1] == 1 && column < COLUMN_COUNT - 1) {
 
             intGrid[row][column+1] = 0;
-            
+            cellsSelected--;
           }
           
           // conditions that change color of cell pressed
           if (intGrid[row][column] == 0) {
 
             intGrid[row][column] = 1;
-            
+            cellsSelected++;
           }
 
           else if (intGrid[row][column] == 1) {
 
             intGrid[row][column] = 0;
-            
+            cellsSelected--;
           }
+
+          // print number of cells selected to the screen
+          println( "Total of " + cellsSelected + " cells are selected.");
           
         }
       }
