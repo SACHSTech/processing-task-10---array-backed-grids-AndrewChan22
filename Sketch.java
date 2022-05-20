@@ -161,7 +161,8 @@ public class Sketch extends PApplet {
           columnCounter++;
         }
       }
-      System.out.println("\nColumn " + column + " has " + columnCounter + " cells selected.");
+      System.out.println("Column " + column + " has " + columnCounter + " cells selected.");
     }
+    
   }
 }
