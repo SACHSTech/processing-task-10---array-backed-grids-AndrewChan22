@@ -46,7 +46,7 @@ public class Sketch extends PApplet {
 
           fill(0, 255, 0);
           rect(MARGIN + (column * (CELL_WIDTH + MARGIN)), MARGIN + (row * (CELL_HEIGHT + MARGIN)), CELL_WIDTH, CELL_HEIGHT);
-          
+
         }
 
         else {
@@ -70,26 +70,26 @@ public class Sketch extends PApplet {
         if (mouseX / (CELL_WIDTH + MARGIN) == column && mouseY / (CELL_HEIGHT + MARGIN) == row) {
 
           // conditions that change colour of cell above cell pressed
-          if (intGrid[row-1][column] == 0 && row > 0) {
+          if (row > 0 && intGrid[row-1][column] == 0) {
 
             intGrid[row-1][column] = 1;
             cellsSelected++;
           }
           
-          else if (intGrid[row-1][column] == 1 && row > 0) {
+          else if (row > 0 && intGrid[row-1][column] == 1) {
 
             intGrid[row-1][column] = 0;
             cellsSelected--;
           }
 
           // conditions that change color of cell below cell pressed
-          if (intGrid[row+1][column] == 0 && row < ROW_COUNT - 1) {
+          if (row < ROW_COUNT - 1 && intGrid[row+1][column] == 0) {
 
             intGrid[row+1][column] = 1;
             cellsSelected++;
           }
 
-          else if (intGrid[row+1][column] == 1 && row < ROW_COUNT - 1) {
+          else if (row < ROW_COUNT - 1 && intGrid[row+1][column] == 1) {
 
             intGrid[row+1][column] = 0;
             cellsSelected--;
@@ -97,26 +97,26 @@ public class Sketch extends PApplet {
           }
 
           // conditions that change color of cell to the left of cell pressed
-          if (intGrid[row][column-1] == 0 && column > 0) {
+          if (column > 0 && intGrid[row][column-1] == 0) {
 
             intGrid[row][column-1] = 1;
             cellsSelected++;
           }
 
-          else if (intGrid[row][column-1] == 1 && column > 0) {
+          else if (column > 0 && intGrid[row][column-1] == 1) {
           
             intGrid[row][column-1] = 0;
             cellsSelected--;
           }
 
           // conditions that change color of cell to the right of cell pressed
-          if (intGrid[row][column+1] == 0 && column < COLUMN_COUNT - 1) {
+          if (column < COLUMN_COUNT - 1 && intGrid[row][column+1] == 0) {
 
             intGrid[row][column+1] = 1;
             cellsSelected++;
           }
 
-          else if (intGrid[row][column+1] == 1 && column < COLUMN_COUNT - 1) {
+          else if (column < COLUMN_COUNT - 1 && intGrid[row][column+1] == 1) {
 
             intGrid[row][column+1] = 0;
             cellsSelected--;
@@ -140,6 +140,28 @@ public class Sketch extends PApplet {
           
         }
       }
+    }
+
+    // prints out number of cells selected in each row
+    for (int row = 0; row < ROW_COUNT; row++) {
+      int rowCounter = 0;
+      for (int column = 0; column < COLUMN_COUNT; column++) {
+        if (intGrid[row][column] == 1) {
+          rowCounter++;
+        }
+      }
+      System.out.println("Row " + row + " has " + rowCounter + " cells selected.");
+    }
+
+    // prints out number of cells selected in each column
+    for (int column = 0; column < ROW_COUNT; column++) {
+      int columnCounter = 0;
+      for (int row = 0; row < COLUMN_COUNT; row++) {
+        if (intGrid[row][column] == 1) {
+          columnCounter++;
+        }
+      }
+      System.out.println("\nColumn " + column + " has " + columnCounter + " cells selected.");
     }
   }
 }
