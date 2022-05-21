@@ -46,7 +46,7 @@ public class Sketch extends PApplet {
     for (int column = 0; column < COLUMN_COUNT; column++) {
       for (int row = 0; row < ROW_COUNT; row++) {
 
-        // colour change if state of array is equal to 1
+        // change colour to green if state of array is equal to 1
         if (intGrid[row][column] == 1) {
 
           fill(0, 255, 0);
