@@ -1,5 +1,9 @@
 import processing.core.PApplet;
 
+/**
+ * Array back grids
+ * @author: A. Chan
+ */
 public class Sketch extends PApplet {
 
   int CELL_WIDTH = 20;
@@ -38,10 +42,11 @@ public class Sketch extends PApplet {
    */
   public void draw() {
 
+    // draw grid to screen
     for (int column = 0; column < COLUMN_COUNT; column++) {
       for (int row = 0; row < ROW_COUNT; row++) {
 
-        // colour change
+        // colour change if state of array is equal to 1
         if (intGrid[row][column] == 1) {
 
           fill(0, 255, 0);
@@ -60,6 +65,9 @@ public class Sketch extends PApplet {
   }
 
 
+  /**
+   * Allows user to click on array backed grid to change cell colour
+   */
   public void mousePressed() {
 
     // changes colour of cell clicked, and all surrounding cells
@@ -144,24 +152,55 @@ public class Sketch extends PApplet {
 
     // prints out number of cells selected in each row
     for (int row = 0; row < ROW_COUNT; row++) {
+      
+      // counts green cells in row
       int rowCounter = 0;
+
+      // counts the number of continuous cells in a row
+      int intCurrentContinuous = 0;
+
+      // largest count of continuous cells in a row
+      int intMaximum = 0;
+
+      // loops through each column in a row
       for (int column = 0; column < COLUMN_COUNT; column++) {
+        
+        // updates row and continuous counter
         if (intGrid[row][column] == 1) {
           rowCounter++;
+          intCurrentContinuous++;
+
+          // replace maxiumum with new highest current continuous
+          if (intCurrentContinuous > intMaximum) {
+            intMaximum = intCurrentContinuous;
+          }
+        }
+
+        // reset continuous counter if green cell is not detected consecutively 
+        else {
+          intCurrentContinuous = 0;
         }
       }
+
+      // prints out number of continuous blocks if there are more than 2 in a row
+      if (intMaximum > 2) {
+        System.out.println("There are " + intMaximum + " continuous blocks selected on row " + row + ".");
+      }
+
       System.out.println("Row " + row + " has " + rowCounter + " cells selected.");
     }
 
     // prints out number of cells selected in each column
     for (int column = 0; column < ROW_COUNT; column++) {
-      int columnCounter = 0;
+      
+      // counts number of green cells in a column
+      int intColumnCounter = 0;
       for (int row = 0; row < COLUMN_COUNT; row++) {
         if (intGrid[row][column] == 1) {
-          columnCounter++;
+          intColumnCounter++;
         }
       }
-      System.out.println("Column " + column + " has " + columnCounter + " cells selected.");
+      System.out.println("Column " + column + " has " + intColumnCounter + " cells selected.");
     }
     
   }
