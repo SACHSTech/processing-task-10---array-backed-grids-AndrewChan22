@@ -16,7 +16,7 @@ public class Sketch extends PApplet {
   int SCREEN_WIDTH = (CELL_WIDTH + MARGIN) * COLUMN_COUNT + MARGIN;
   int SCREEN_HEIGHT = (CELL_HEIGHT + MARGIN) * ROW_COUNT + MARGIN;
 
-  int intGrid[][] = new int[ROW_COUNT][COLUMN_COUNT];
+  int[][] intGrid = new int[ROW_COUNT][COLUMN_COUNT];
 
   int cellsSelected;
 
@@ -59,11 +59,9 @@ public class Sketch extends PApplet {
           fill(255, 255, 255);
           rect(MARGIN + (column * (CELL_WIDTH + MARGIN)), MARGIN + (row * (CELL_HEIGHT + MARGIN)), CELL_WIDTH, CELL_HEIGHT);
         }
-
       }
     }
   }
-
 
   /**
    * Allows user to click on array backed grid to change cell colour
@@ -73,7 +71,7 @@ public class Sketch extends PApplet {
     // changes colour of cell clicked, and all surrounding cells
     for (int column = 0; column < COLUMN_COUNT; column++) {
       for (int row = 0; row < ROW_COUNT; row++) {
-
+        
         // calculation of mouse coordinates is calculated by flooring the coordinates of mouseX and mouseY when divided by size of a cell
         if (mouseX / (CELL_WIDTH + MARGIN) == column && mouseY / (CELL_HEIGHT + MARGIN) == row) {
 
